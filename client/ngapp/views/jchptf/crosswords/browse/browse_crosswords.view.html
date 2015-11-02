@@ -1,0 +1,15 @@
+<treecontrol class="tree-classic"
+  tree-model="crosswords.rootFolder"
+  on-selection="crosswords.onSelectionChanged(node, selected)"
+  on-node-toggle="crosswords.onExpansionChanged(node, expanded)"
+  selected-node="crosswords.selectedNode"
+  expanded-nodes="crosswords.expandedNodes"
+  options="crosswords.treeOptions"
+  order-bye="crosswords.toOrderTag(node)"
+  filter-comparator="asPathString"
+>
+  <span class="badge" ng-class="{ 'badge-info': node.getDocumentKind() == DocumentKind.FOLDER, 'badge-success':node.getDocumentKind() == DocumentKind.XW_TICKET, 'badge-warning':node.getDocumentKind() == DocumentKind.XW_RESULT}">
+{{node.nodeName}}::{{node.documentKind.name}} {{node.uuid}}  {{node.hydratedState}}
+  </span>
+</treecontrol>
+

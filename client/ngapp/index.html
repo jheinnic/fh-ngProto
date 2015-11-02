@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="fh-mgr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+
+  <!--
+  The base allows us to use relative links to resources even when
+  this page was served from non-root URL, e.g. '/my/todos'
+  -->
+  <base href="/">
+
+  <title>John Heinnickel's Portfolio Website</title>
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+  <!-- build:css(client/ngapp/) styles/vendor.css -->
+  <!-- bower:css -->
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:css(build/temp/) styles/app.css -->
+  <!-- htmlbuild:style bundle -->
+  <!-- /htmlbuild -->
+  <!-- endbuild -->
+</head>
+
+<body>
+  <div class="container">
+    <jch-nav-bar></jch-nav-bar>
+    <div ui-view=""></div>
+    <div class="row">
+      <div class="span12">
+        <footer>
+          <p>&copy; John C. Heinnickel, 2015</p>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!--[if lt IE 9]>
+  <script src="vendor/es5-shim/es5-shim.js" type="text/javascript"></script>
+  <script src="vendor/json3/lib/json3.js" type="text/javascript"></script>
+  <![endif]-->
+
+  <!-- build:js(client/ngapp/) scripts/vendor.js -->
+  <!-- bower:js -->
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:js(build/temp/) scripts/app.js -->
+  <script src="scripts/app.js" type="text/javascript"></script>
+  <!-- endbuild -->
+
+a <script type="text/javascript">
+    require('fh-mgr/module');
+  </script>
+
+  <!-- build:remove
+  <script src="scripts/lr_init.js" type="text/javascript"></script>
+  endbuild -->
+</body>
+</html>

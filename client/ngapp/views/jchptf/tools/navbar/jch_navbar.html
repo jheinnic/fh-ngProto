@@ -1,0 +1,10 @@
+<div class="navbar navbar-inverse navbar-fixed-top navbar-default" role="banner">
+    <div class="navbar-header navbar-right">
+        <a class="navbar-brand" href="#">{{navDataModel.brandName}}</a>
+    </div>
+    <ul class="nav navbar-nav navbar-left" role="navigation" bs-navbar>
+        <li ng-repeat="tabModel in navDataModel.tabModels" data-match-route="{{tabModel.getMatchRoute()}}">
+            <a href="{{tabModel.clickRoute}}">{{tabModel.displayLabel}}</a>
+        </li>
+    </ul>
+</div>

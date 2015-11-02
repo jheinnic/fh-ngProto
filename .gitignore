@@ -1,0 +1,61 @@
+# Eclipse project
+.classpath
+.project
+.settings/
+
+# Webstorm project
+.idea
+
+# Windows environment
+desktop.ini
+Thumbs.db
+
+# Node dependency management
+node_modules
+npm-debug.log
+
+# Bower dependency management
+client/ngapp/vendor
+
+# vi temp files
+*~
+.*.swp
+
+# A kitchen sink for project-associated files that are local notes not to be
+# committed to Git.
+junk
+
+# Some unused subdirs
+client/ngapp/images/jchptf/bootstrap
+client/ngapp/images/jchptf/jwplayer
+
+# Nodemon/Grunt
+.rebooted
+`
+# Loopback additions
+*.csv
+*.dat
+*.gz
+*.log
+*.out
+*.pid
+*.seed
+.DS_Store
+.tmp
+build
+global.config.js
+bower_components
+client/dist
+ngapp/config/bundle.js
+html5/build
+lib-cov
+local.config.js
+logs
+pids
+lbclient/browser.bundle.js
+results
+
+
+# Typescript exploration
+tsd.json
+typings

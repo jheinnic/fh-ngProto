@@ -1,0 +1,7 @@
+# .map and .js files at root and below are compiled CoffeeScript output
+*.map
+*.js
+
+# CSS files except for one at root are compiled Less output
+**/*.css
+style.css

@@ -1,0 +1,2721 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.8.0",
+        "title": "Foghorn Catalog API"
+    },
+    "base_path": "/api",
+    "tags": [
+        {
+            "name": "sensors"
+        },
+        {
+            "name": "templates"
+        },
+        {
+            "name": "devices"
+        },
+        {
+            "name": "measurements"
+        },
+        {
+            "name": "protocols"
+        },
+        {
+            "name": "units"
+        },
+        {
+            "name": "expressions"
+        },
+        {
+            "name": "implementations"
+        },
+        {
+            "name": "serdes"
+        },
+        {
+            "name": "measures"
+        },
+        {
+            "name": "fields"
+        }
+    ],
+    "paths": {
+        "/devices": {
+            "get": {
+                "tags": [
+                    "devices"
+                ],
+                "summary": "List all devices",
+                "description": "",
+                "operation_id": "getAll",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "deploymentId",
+                        "in": "query",
+                        "description": "The deployment id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Device"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "devices"
+                ],
+                "summary": "Add a Device",
+                "description": "",
+                "operation_id": "add",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Device object to add",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Device"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Device"
+                        }
+                    }
+                }
+            }
+        },
+        "/devices/{device_id}/deployed_implementation/{implementation_id}": {
+            "post": {
+                "tags": [
+                    "devices"
+                ],
+                "summary": "Deploy an implementation to an edge device",
+                "description": "",
+                "operation_id": "deployImplementation",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "deployment_id",
+                        "in": "query",
+                        "description": "The deployment id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "device_id",
+                        "in": "path",
+                        "description": "Device Id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "implementation_id",
+                        "in": "path",
+                        "description": "Implementation Id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/devices/{id}": {
+            "get": {
+                "tags": [
+                    "devices"
+                ],
+                "summary": "Get Device by id",
+                "description": "",
+                "operation_id": "get",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Device id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Device"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "devices"
+                ],
+                "summary": "Update an existing Device",
+                "description": "",
+                "operation_id": "update",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Device id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The updated Device object",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Device"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Device"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "devices"
+                ],
+                "summary": "Delete a Device by id",
+                "description": "",
+                "operation_id": "delete",
+                "consumes": [
+                    "*/*"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Device id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/expressions": {
+            "get": {
+                "tags": [
+                    "expressions"
+                ],
+                "summary": "List all expressions",
+                "description": "",
+                "operation_id": "getAll",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Expression"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "expressions"
+                ],
+                "summary": "Add an Expression",
+                "description": "",
+                "operation_id": "add",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Expression object to add",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ExpressionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Expression"
+                        }
+                    }
+                }
+            }
+        },
+        "/expressions/{id}": {
+            "get": {
+                "tags": [
+                    "expressions"
+                ],
+                "summary": "Get Expression by id",
+                "description": "",
+                "operation_id": "get",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Expression id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Expression"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "expressions"
+                ],
+                "summary": "Update an existing Expression",
+                "description": "",
+                "operation_id": "update",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the Expression to update",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The update Expression object",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ExpressionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Expression"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "expressions"
+                ],
+                "summary": "Delete an Expression by id",
+                "description": "",
+                "operation_id": "delete",
+                "consumes": [
+                    "*/*"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Expression id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/implementations": {
+            "get": {
+                "tags": [
+                    "implementations"
+                ],
+                "summary": "List all Implementations",
+                "description": "",
+                "operation_id": "getAll",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Implementation"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "implementations"
+                ],
+                "summary": "Add an Implementation",
+                "description": "",
+                "operation_id": "add",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Implementation object to add",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ImplementationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Implementation"
+                        }
+                    }
+                }
+            }
+        },
+        "/implementations/{id}": {
+            "get": {
+                "tags": [
+                    "implementations"
+                ],
+                "summary": "Get Implementation by id",
+                "description": "",
+                "operation_id": "get",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Implementation id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Implementation"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "implementations"
+                ],
+                "summary": "Update an existing Implementation",
+                "description": "",
+                "operation_id": "update",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the Implementation to update",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The updated Implementation object",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ImplementationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Implementation"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "implementations"
+                ],
+                "summary": "Delete an Implementation by id",
+                "description": "",
+                "operation_id": "delete",
+                "consumes": [
+                    "*/*"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Implementation id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/implementations/{id}/mappings": {
+            "get": {
+                "tags": [
+                    "implementations"
+                ],
+                "summary": "List all Mappings for a particular Implementation",
+                "description": "",
+                "operation_id": "getMappings",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Implementation id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "additional_properties": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/implementations/{id}/mappings/{fieldId}/{sensorMeasurementId}": {
+            "put": {
+                "tags": [
+                    "implementations"
+                ],
+                "summary": "Map a TemplateField id to a SensorMeasurement id for a particular Implementation",
+                "description": "",
+                "operation_id": "mapField",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Implementation id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "fieldId",
+                        "in": "path",
+                        "description": "TemplateField id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "sensorMeasurementId",
+                        "in": "path",
+                        "description": "SensorMeasurement id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "additional_properties": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "implementations"
+                ],
+                "summary": "Deletes an existing TemplateField mapping for a particular implementation",
+                "description": "",
+                "operation_id": "deleteFieldMapping",
+                "consumes": [
+                    "text/plain"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Implementation id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "fieldId",
+                        "in": "path",
+                        "description": "TemplateField id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "additional_properties": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/measures": {
+            "get": {
+                "tags": [
+                    "measures"
+                ],
+                "summary": "List all measures",
+                "description": "",
+                "operation_id": "getAll",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Measure"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "measures"
+                ],
+                "summary": "Add a Measure",
+                "description": "",
+                "operation_id": "add",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Measure object to add",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MeasureRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Measure"
+                        }
+                    }
+                }
+            }
+        },
+        "/measures/{id}": {
+            "get": {
+                "tags": [
+                    "measures"
+                ],
+                "summary": "Get Measure by id",
+                "description": "",
+                "operation_id": "get",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Measure id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Measure"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "measures"
+                ],
+                "summary": "Update an existing Measure",
+                "description": "",
+                "operation_id": "update",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the measure to update",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The updated Measure object",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/MeasureRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Measure"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "measures"
+                ],
+                "summary": "Delete a Measure by id",
+                "description": "",
+                "operation_id": "delete",
+                "consumes": [
+                    "*/*"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Measure id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/protocols": {
+            "get": {
+                "tags": [
+                    "protocols"
+                ],
+                "summary": "List all protocols",
+                "description": "",
+                "operation_id": "getAll",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Protocol"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "protocols"
+                ],
+                "summary": "Add a Protocol",
+                "description": "",
+                "operation_id": "add",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Protocol object to add",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ProtocolRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Protocol"
+                        }
+                    }
+                }
+            }
+        },
+        "/protocols/{id}": {
+            "get": {
+                "tags": [
+                    "protocols"
+                ],
+                "summary": "Get Protocol by id",
+                "description": "",
+                "operation_id": "get",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Protocol id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Protocol"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "protocols"
+                ],
+                "summary": "Update an existing Protocol",
+                "description": "",
+                "operation_id": "update",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the protocol to update",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The updated Protocol object",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ProtocolRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Protocol"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "protocols"
+                ],
+                "summary": "Delete a Protocol by id",
+                "description": "",
+                "operation_id": "delete",
+                "consumes": [
+                    "*/*"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Protocol id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/sensors": {
+            "get": {
+                "tags": [
+                    "sensors"
+                ],
+                "summary": "List all sensors",
+                "description": "",
+                "operation_id": "getAll",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Sensor"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "sensors"
+                ],
+                "summary": "Add a Sensor",
+                "description": "",
+                "operation_id": "add",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Sensor object to add",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/SensorRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Sensor"
+                        }
+                    }
+                }
+            }
+        },
+        "/sensors/{id}": {
+            "get": {
+                "tags": [
+                    "sensors"
+                ],
+                "summary": "Get Sensor by id",
+                "description": "",
+                "operation_id": "get",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Sensor id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Sensor"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "sensors"
+                ],
+                "summary": "Update an existing Sensor",
+                "description": "",
+                "operation_id": "update",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the Sensor to update",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The updated Sensor object",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/SensorRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Sensor"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "sensors"
+                ],
+                "summary": "Delete a Sensor by id",
+                "description": "",
+                "operation_id": "delete",
+                "consumes": [
+                    "*/*"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Sensor id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/sensors/{sensorId}/measurements": {
+            "get": {
+                "tags": [
+                    "measurements"
+                ],
+                "summary": "Get all SensorMeasurements for a particular Sensor",
+                "description": "",
+                "operation_id": "getAllMeasurements",
+                "parameters": [
+                    {
+                        "name": "sensorId",
+                        "in": "path",
+                        "description": "Sensor id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SensorMeasurement"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "measurements"
+                ],
+                "summary": "Add a new SensorMeasurement for a particular Sensor",
+                "description": "",
+                "operation_id": "addMeasurement",
+                "parameters": [
+                    {
+                        "name": "sensorId",
+                        "in": "path",
+                        "description": "Sensor id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The new SensorMeasurement object",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/SensorMeasurementRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/SensorMeasurement"
+                        }
+                    }
+                }
+            }
+        },
+        "/sensors/{sensorId}/measurements/{id}": {
+            "get": {
+                "tags": [
+                    "measurements"
+                ],
+                "summary": "Get a SensorMeasurements for a particular Sensor by Measure id",
+                "description": "",
+                "operation_id": "getMeasurement",
+                "parameters": [
+                    {
+                        "name": "sensorId",
+                        "in": "path",
+                        "description": "Sensor id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Sensor id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/SensorMeasurement"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "measurements"
+                ],
+                "summary": "Update an existing SensorMeasurement for a particular Sensor",
+                "description": "",
+                "operation_id": "updateMeasurement",
+                "parameters": [
+                    {
+                        "name": "sensorId",
+                        "in": "path",
+                        "description": "Sensor id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Measurement id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The new SensorMeasurement object",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/SensorMeasurementRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/SensorMeasurement"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "measurements"
+                ],
+                "summary": "Update an existing SensorMeasurement for a particular Sensor",
+                "description": "",
+                "operation_id": "deleteMeasurement",
+                "consumes": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "sensorId",
+                        "in": "path",
+                        "description": "Sensor id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Measurement id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/serdes": {
+            "get": {
+                "tags": [
+                    "serdes"
+                ],
+                "summary": "List all serdes",
+                "description": "",
+                "operation_id": "getAll",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Serde"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "serdes"
+                ],
+                "summary": "Add a Serde",
+                "description": "",
+                "operation_id": "add",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Sensor object to add",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/SerdeRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Serde"
+                        }
+                    }
+                }
+            }
+        },
+        "/serdes/{id}": {
+            "get": {
+                "tags": [
+                    "serdes"
+                ],
+                "summary": "Get Serde by id",
+                "description": "",
+                "operation_id": "get",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Serde id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Serde"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "serdes"
+                ],
+                "summary": "Update an existing Serde",
+                "description": "",
+                "operation_id": "update",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Serde id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The updated Serde object",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/SerdeRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Serde"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "serdes"
+                ],
+                "summary": "Delete a Serde by id",
+                "description": "",
+                "operation_id": "delete",
+                "consumes": [
+                    "*/*"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Serde id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/templates": {
+            "get": {
+                "tags": [
+                    "templates"
+                ],
+                "summary": "List all templates",
+                "description": "",
+                "operation_id": "getAll",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Template"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "templates"
+                ],
+                "summary": "Add a Template",
+                "description": "",
+                "operation_id": "add",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Template object to add",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/TemplateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Template"
+                        }
+                    }
+                }
+            }
+        },
+        "/templates/{id}": {
+            "get": {
+                "tags": [
+                    "templates"
+                ],
+                "summary": "Get Template by id",
+                "description": "",
+                "operation_id": "get",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Template id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Template"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "templates"
+                ],
+                "summary": "Update an existing Template",
+                "description": "",
+                "operation_id": "update",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Template id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The update Template object",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/TemplateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Template"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "templates"
+                ],
+                "summary": "Delete a Template by id",
+                "description": "",
+                "operation_id": "delete",
+                "consumes": [
+                    "*/*"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Template id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/templates/{templateId}/fields": {
+            "get": {
+                "tags": [
+                    "fields"
+                ],
+                "summary": "Get all TemplateFields for a particular Template",
+                "description": "",
+                "operation_id": "getAllFields",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "templateId",
+                        "in": "path",
+                        "description": "Template id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/TemplateField"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "fields"
+                ],
+                "summary": "Add a new TemplateField for a particular Template",
+                "description": "",
+                "operation_id": "addField",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "templateId",
+                        "in": "path",
+                        "description": "Template id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The new TemplateField object",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/TemplateFieldRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/TemplateField"
+                        }
+                    }
+                }
+            }
+        },
+        "/templates/{templateId}/fields/{id}": {
+            "get": {
+                "tags": [
+                    "fields"
+                ],
+                "summary": "Get a TemplateField for a particular Template",
+                "description": "",
+                "operation_id": "getField",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "templateId",
+                        "in": "path",
+                        "description": "Template id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "TemplateField id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/TemplateField"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "fields"
+                ],
+                "summary": "Update an existing TemplateField for a particular Template",
+                "description": "",
+                "operation_id": "updateField",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "templateId",
+                        "in": "path",
+                        "description": "Template id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Field id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The new TemplateField object",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/TemplateFieldRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/TemplateField"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "fields"
+                ],
+                "summary": "Delete an existing TemplateField for a particular Template",
+                "description": "",
+                "operation_id": "deleteField",
+                "consumes": [
+                    "*/*"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "templateId",
+                        "in": "path",
+                        "description": "Template id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Field id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/units": {
+            "get": {
+                "tags": [
+                    "units"
+                ],
+                "summary": "List all units",
+                "description": "",
+                "operation_id": "getAll",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Unit"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "units"
+                ],
+                "summary": "Add a Unit",
+                "description": "",
+                "operation_id": "add",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Unit object to add",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/UnitRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Unit"
+                        }
+                    }
+                }
+            }
+        },
+        "/units/{id}": {
+            "get": {
+                "tags": [
+                    "units"
+                ],
+                "summary": "Get Unit by id",
+                "description": "",
+                "operation_id": "get",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Unit id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Unit"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "units"
+                ],
+                "summary": "Update an existing Unit",
+                "description": "",
+                "operation_id": "update",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the Unit to update",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The update Unit object",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/UnitRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Unit"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "units"
+                ],
+                "summary": "Delete a Unit by id",
+                "description": "",
+                "operation_id": "delete",
+                "consumes": [
+                    "*/*"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Unit id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "TemplateRequest": {
+            "required": [
+                "description",
+                "name",
+                "version"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "SensorMetadata": {
+            "required": [
+                "id",
+                "key",
+                "sensor",
+                "sensor_id",
+                "value"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "sensor_id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "sensor": {
+                    "read_only": true,
+                    "$ref": "#/definitions/Sensor"
+                },
+                "key": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "value": {
+                    "type": "string",
+                    "read_only": true
+                }
+            }
+        },
+        "MeasureRequest": {
+            "required": [
+                "abbreviation",
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "abbreviation": {
+                    "type": "string",
+                    "read_only": true
+                }
+            }
+        },
+        "ExpressionRequest": {
+            "required": [
+                "expression",
+                "implementation_id",
+                "name",
+                "type"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "physics",
+                        "aggregation"
+                    ]
+                },
+                "expression": {
+                    "type": "string"
+                },
+                "implementation_id": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "Device": {
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "name": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "implementation_id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                }
+            }
+        },
+        "Template": {
+            "required": [
+                "description",
+                "fields",
+                "name",
+                "version"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "name": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "description": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "version": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "fields": {
+                    "type": "array",
+                    "read_only": true,
+                    "items": {
+                        "$ref": "#/definitions/TemplateField"
+                    }
+                }
+            }
+        },
+        "SensorRequest": {
+            "required": [
+                "name",
+                "protocol_id",
+                "publish_id",
+                "serde_id"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "publish_id": {
+                    "type": "string"
+                },
+                "manufacturer": {
+                    "type": "string"
+                },
+                "model": {
+                    "type": "string"
+                },
+                "protocol_id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "serde_id": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "TemplateField": {
+            "required": [
+                "description",
+                "id",
+                "measure",
+                "measure_id",
+                "name",
+                "template",
+                "template_id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "measure_id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "template_id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "template": {
+                    "$ref": "#/definitions/Template"
+                },
+                "measure": {
+                    "$ref": "#/definitions/Measure"
+                }
+            }
+        },
+        "Serde": {
+            "required": [
+                "classname",
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "name": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "classname": {
+                    "type": "string",
+                    "read_only": true
+                }
+            }
+        },
+        "ProtocolRequest": {
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "Implementation": {
+            "required": [
+                "name",
+                "template_id",
+                "version"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "name": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "version": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "template_id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "template": {
+                    "read_only": true,
+                    "$ref": "#/definitions/Template"
+                },
+                "mappings": {
+                    "type": "object",
+                    "read_only": true,
+                    "additional_properties": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "expressions": {
+                    "type": "object",
+                    "read_only": true,
+                    "additional_properties": {
+                        "$ref": "#/definitions/List"
+                    }
+                }
+            }
+        },
+        "UnitRequest": {
+            "required": [
+                "abbreviation",
+                "measure_id",
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "abbreviation": {
+                    "type": "string"
+                },
+                "measure_id": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "Measure": {
+            "required": [
+                "abbreviation",
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "abbreviation": {
+                    "type": "string"
+                }
+            }
+        },
+        "SensorMeasurement": {
+            "required": [
+                "description",
+                "id",
+                "key",
+                "measure",
+                "measure_id",
+                "name",
+                "sensor_id",
+                "unit",
+                "unit_id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "sensor_id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "measure_id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "measure": {
+                    "read_only": true,
+                    "$ref": "#/definitions/Measure"
+                },
+                "unit_id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "unit": {
+                    "read_only": true,
+                    "$ref": "#/definitions/Unit"
+                },
+                "key": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "name": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "description": {
+                    "type": "string",
+                    "read_only": true
+                }
+            }
+        },
+        "Unit": {
+            "required": [
+                "abbreviation",
+                "measure_id",
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "abbreviation": {
+                    "type": "string"
+                },
+                "measure": {
+                    "$ref": "#/definitions/Measure"
+                },
+                "measure_id": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "ImplementationRequest": {
+            "required": [
+                "name",
+                "template_id",
+                "version"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "version": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "template_id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                }
+            }
+        },
+        "TemplateFieldRequest": {
+            "required": [
+                "description",
+                "measure_id",
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "measure_id": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "Sensor": {
+            "required": [
+                "name",
+                "protocol_id",
+                "publish_id",
+                "serde_id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "name": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "publish_id": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "manufacturer": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "model": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "protocol_id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "protocol": {
+                    "read_only": true,
+                    "$ref": "#/definitions/Protocol"
+                },
+                "serde_id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "serde": {
+                    "read_only": true,
+                    "$ref": "#/definitions/Serde"
+                },
+                "sensor_measurements": {
+                    "type": "array",
+                    "read_only": true,
+                    "items": {
+                        "$ref": "#/definitions/SensorMeasurement"
+                    }
+                },
+                "sensor_metadata": {
+                    "type": "array",
+                    "read_only": true,
+                    "items": {
+                        "$ref": "#/definitions/SensorMetadata"
+                    }
+                }
+            }
+        },
+        "SerdeRequest": {
+            "required": [
+                "classname",
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "classname": {
+                    "type": "string"
+                }
+            }
+        },
+        "SensorMeasurementRequest": {
+            "required": [
+                "description",
+                "key",
+                "measure_id",
+                "name",
+                "unit_id"
+            ],
+            "properties": {
+                "measure_id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "unit_id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "key": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "name": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "description": {
+                    "type": "string",
+                    "read_only": true
+                }
+            }
+        },
+        "Expression": {
+            "required": [
+                "expression",
+                "implementation_id",
+                "name",
+                "type"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "name": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "type": {
+                    "type": "string",
+                    "read_only": true,
+                    "enum": [
+                        "physics",
+                        "aggregation"
+                    ]
+                },
+                "expression": {
+                    "type": "string",
+                    "read_only": true
+                },
+                "implementation_id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                }
+            }
+        },
+        "List": {
+            "type": "object"
+        },
+        "Protocol": {
+            "required": [
+                "id",
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "read_only": true
+                },
+                "name": {
+                    "type": "string",
+                    "read_only": true
+                }
+            }
+        }
+    }
+}

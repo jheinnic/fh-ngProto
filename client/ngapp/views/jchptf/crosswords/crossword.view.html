@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-xs-3">
+        <div id="xwButtons" class="bs-sidebar hidden-print" role="complementary" data-offset-top="80" bs-affix>
+            <button type="button" class="btn btn-lg btm-info" ng-click="alert('TBD: Reset form');">New</button>
+            <button type="button" class="btn btn-lg btn-info" data-animation="am-fade-and-slide-left"
+                    data-template="modal/xwListMenu.html" data-html="true" bs-modal="modal">Open...
+            </button>
+        </div>
+    </div>
+    <div class="col-md-6 col-xs-9">
+        <xw-ticket ticket-document="documentModel" payout-model="payoutModel" progress-model="progressModel"></xw-ticket>
+    </div>
+    <div class="col-md-3 col-xs-6">
+        <div id="error_explanation"></div>
+        <div id="debug_messages"></div>
+        <xw-progress-report progress-model="progressModel"></xw-progress-report>
+    </div>
+    <div class="col-xs-6 col-md-offset-9 col-md-3">
+        <xw-payout-report payout-model="payoutModel"></xw-payout-report>
+    </div>
+</div>
+<script type="text/ng-template" id="modal/xwListMenu.html">
+    <div id="xwListMenu" class="modal fade">
+        <div class="model-body">
+            <table class="table table-condensed">
+                <tr class="tikList-header">
+                    <th>Bonus<br>word</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr ng-repeat="rpt in tm.rpts">
+                    <td>Word{{rpt}}</td>
+                    <td><a href="#">Open</a></td>
+                    <td><a href="#">Delete</a></td>
+                </tr>
+                <tr>
+                    <td>{{bonus_word}}</td>
+                    <td><a href="#">Open</a></td>
+                    <td><a href="#">Delete</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</script>

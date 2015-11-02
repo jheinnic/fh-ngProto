@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html ng-app="fh-mgr.app">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+
+  <!--
+  The base allows us to use relative links to resources even when
+  this page was served from non-root URL, e.g. '/my/todos'
+  -->
+  <base href="/">
+
+  <title>John Heinnickel's Portfolio Website</title>
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+  <!-- build:css(client/dist) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="vendor/nvd3/build/nv.d3.css" />
+  <link rel="stylesheet" href="vendor/angular-ui-grid/ui-grid.css" />
+  <link rel="stylesheet" href="vendor/angular-toastr/dist/angular-toastr.css" />
+  <link rel="stylesheet" href="vendor/angular-tree-control/css/tree-control.css" />
+  <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="vendor/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:css(client/dist) styles/main.css -->
+  <!-- hbuild:style bundle -->
+  <!-- /hbuild -->
+  <!-- endbuild -->
+</head>
+
+<body>
+  <div class="container">
+    <nav-bar></nav-bar>
+    <div ui-view=""></div>
+    <div class="row">
+      <div class="span12">
+        <footer>
+          <p>&copy; John C. Heinnickel, 2015</p>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!--[if lt IE 9]>
+  <script src="vendor/es5-shim/es5-shim.js" type="text/javascript"></script>
+  <script src="vendor/json3/lib/json3.js" type="text/javascript"></script>
+  <![endif]-->
+
+  <!-- build:js(client/dist) scripts/vendor.js -->
+  <script src="vendor/underscore/underscore.js" type="text/javascript"></script>
+  <!-- bower:js -->
+  <script src="vendor/jquery/dist/jquery.js"></script>
+  <script src="vendor/angular/angular.js"></script>
+  <script src="vendor/angular-cookies/angular-cookies.js"></script>
+  <script src="vendor/angular-resource/angular-resource.js"></script>
+  <script src="vendor/angular-sanitize/angular-sanitize.js"></script>
+  <script src="vendor/angular-animate/angular-animate.js"></script>
+  <script src="vendor/d3/d3.js"></script>
+  <script src="vendor/nvd3/build/nv.d3.js"></script>
+  <script src="vendor/angular-ui-grid/ui-grid.js"></script>
+  <script src="vendor/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="vendor/angular-ui-utils/ui-utils.js"></script>
+  <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="vendor/angular-strap/dist/angular-strap.js"></script>
+  <script src="vendor/angular-strap/dist/angular-strap.tpl.js"></script>
+  <script src="vendor/angular-toastr/dist/angular-toastr.tpls.js"></script>
+  <script src="vendor/angular-hotkeys/angular-hotkeys.js"></script>
+  <script src="vendor/angular-hotkeys/angular-hotkeys.min.js"></script>
+  <script src="vendor/jquery-ui/jquery-ui.js"></script>
+  <script src="vendor/angular-dragdrop/src/angular-dragdrop.js"></script>
+  <script src="vendor/localforage/dist/localforage.js"></script>
+  <script src="vendor/angular-localForage/dist/angular-localForage.js"></script>
+  <script src="vendor/angular-tree-control/angular-tree-control.js"></script>
+  <script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="vendor/angular-modal-service/dst/angular-modal-service.js"></script>
+  <script src="vendor/angular-event-aggregator/angular-event-aggregator.min.js"></script>
+  <script src="vendor/leaflet/dist/leaflet.js"></script>
+  <script src="vendor/leaflet/dist/leaflet-src.js"></script>
+  <script src="vendor/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
+  <script src="vendor/gsap/src/uncompressed/TweenMax.js"></script>
+  <script src="vendor/ngFx/dist/ngFx.js"></script>
+  <script src="vendor/async/lib/async.js"></script>
+  <script src="vendor/lodash/lodash.js"></script>
+  <script src="vendor/sprintf.js/src/sprintf.js"></script>
+  <script src="vendor/EventSource/eventsource.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+  <script src="vendor/angular-nvd3/dist/angular-nvd3.min.js" type="text/javascript"></script>
+
+  <!-- build:js(client/dist) scripts/scripts.js -->
+  <script src="scripts/fh-mgr.js" type="text/javascript"></script>
+  <!-- endbuild -->
+
+  <!-- dbuild:remove -->
+  <script src="scripts/livereload.js" type="text/javascript"></script>
+  <!-- /dbuild -->
+</body>
+</html>
